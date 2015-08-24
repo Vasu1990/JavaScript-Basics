@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+        ///this set on the calling object////
+        var greet = {
+            name: "greetName",
+            runGreet: function () {
+                console.log(this.name);
+            }
+        }
+        var cody = { name: 'codyBoy', greetWorld:greet.runGreet };
+        var lisa = { name: 'lisa', greetWorld: greet.runGreet };
+
+
+        cody.greetWorld();
+        lisa.greetWorld();
+
+
+        /////////method borrowing using this///////////
+        var greet = {
+            name :"sfdds",
+            runGreet: function () {
+                console.log(this.name, arguments[0], arguments[1]);
+            }
+        }
+        var cody = { name: 'codyBoy' };
+        var lisa = { name: 'lisa' };
+
+        // Invoke the runGreet function as if it were inside of the cody object.
+        greet.runGreet.call(cody, 'foo', 'bar'); // Logs 'cody foo bar'.
+
+        // Invoke the runGreet function as if it were inside of the lisa object.
+        greet.runGreet.apply(lisa, ['foo', 'bar']); // Logs 'lisa foo bar'.
+        /* Notice the difference between call() and apply() in how parameters are sent to the function being invoked. */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function Fun(){
+            a = 10;
+            console.log("first pos inside fun" + a);
+            // 2. What is the value of variable “a” here? 10
+        }
+        console.log("second pos outside fun" + a);
+        // 1. What is the value of variable “a” here? undefined
+
+        Fun();
+        console.log("third pos after fun invoked" + a);
+        // 3. What is the value of variable “a” here? 10
+
+        -------------------------------------------------------------------------------------------------------------------------------------------------------
+        -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // What will be value of variable “a” at position 1, 2 and 3? 
+        //Position number represents "order of execution"/ "flow of control".
+
+        function Fun(){
+            var a = 10; 
+            // 2. What is the value of variable “a” here? 10 
+        }
+
+        // 1. What is the value of variable “a” here? undefined
+
+        Fun();
+
+        // 3. What is the value of variable “a” here? undefined
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // What will be value of variable “a” at position 1, 2, 3 and 4? Position number represents "order of execution"/ "flow of control". 
+
+        function Fun(param){
+            a = 10; 
+
+            if(param) {
+                var a = 20;
+                // 2. What is the value of variable “a” here? 20
+            }
+
+            // 3. What is the value of variable “a” here? 20
+        }
+
+        // 1. What is the value of variable “a” here? undefined
+
+        Fun(true);
+            
+        // 4. What is the value of variable “a” here? undefined
+
+
+
+    </script>
+
+</body>
+</html>

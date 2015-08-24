@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+<script>
+
+    var foo = 'foo';
+
+    var myObject = { foo: 'I am myObject.foo' };
+    var sayFoo = function () {
+        console.log(this.foo);
+    };
+
+    // Give myObject a sayFoo property and have it point to the sayFoo function.
+    myObject.sayFoo = sayFoo;
+
+    myObject.sayFoo(); // Logs 'I am myObject.foo'.
+    sayFoo(); // Logs 'foo'.
+
+
+    //More on this in CallApply sample
+
+</script>
+</body>
+</html>

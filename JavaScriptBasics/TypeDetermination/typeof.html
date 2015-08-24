@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+        // Primitive values.
+        var myNull = null;
+        var myUndefined = undefined;
+        var primitiveString1 = "string";
+        var primitiveString2 = String('string');
+        var primitiveNumber1 = 10;
+        var primitiveNumber2 = Number('10');
+        var primitiveBoolean1 = true;
+        var primitiveBoolean2 = Boolean('true');
+        console.log(typeof myNull); // Logs object? WHAT? Be aware...
+        console.log(typeof myUndefined); // Logs undefined.
+        console.log(typeof primitiveString1, typeof primitiveString2); // Logs string string.
+        console.log(typeof primitiveNumber1, typeof primitiveNumber2); // Logs number number
+        console.log(typeof primitiveBoolean1, typeof primitiveBoolean2); // Logs boolean boolean.
+
+        // Complex values.
+        var myNumber = new Number(23);
+        var myString = new String('male');
+        var myBoolean = new Boolean(false);
+        var myObject = new Object();
+        var myArray = new Array('foo', 'bar');
+        var myFunction = new Function("x", "y", "return x * y");
+        var myDate = new Date();
+        var myRegExp = new RegExp('\\bt[a-z]+\\b');
+        var myError = new Error('Darn!');
+        console.log(typeof myNumber); // Logs object.
+        console.log(typeof myString); // Logs object.
+        console.log(typeof myBoolean); // Logs object.
+        console.log(typeof myObject); // Logs object.
+        console.log(typeof myArray); // Logs object.
+        console.log(typeof myFunction); // Logs function? WHAT? Be aware...
+        console.log(typeof myDate); // Logs object.
+        console.log(typeof myRegExp); // Logs function? WHAT? Be aware...
+        console.log(typeof myError); // Logs object.
+    </script>
+</body>
+</html>

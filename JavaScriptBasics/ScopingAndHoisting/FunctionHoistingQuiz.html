@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        
+        //Q.For the following code snippet, answer the question that follow the snippet
+
+        // Position 1
+
+        function Fun1(){
+            Fun2();
+        }
+
+        // Position 2
+
+        function Fun2() {
+            alert("Hi");
+        }
+
+        // Position 3
+
+        //It is allowed to call both Fun1 and Fun2 from position 3 as both are defined by then. 
+        //Which of the functions Fun1 and Fun2 can be called from Position 1 and Position 2?
+
+        
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //Q. For the following code snippet, answer the question that follow the snippet
+
+        // Position 1
+
+        var Fun1 = function(){
+            Fun2();
+        }
+
+            // Position 2
+
+            var Fun2 = function() {
+                alert('Hi');
+            }
+
+            // Position 3
+
+            //It is allowed to call both Fun1 and Fun2 from position 3 as both are defined by then. 
+            //Which of the functions Fun1 and Fun2 can be called from Position 1 and Position 2?
+
+        //note : the solution is hoisting
+
+    </script>
+</body>
+</html>

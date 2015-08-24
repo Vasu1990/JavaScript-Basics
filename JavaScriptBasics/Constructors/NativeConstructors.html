@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+        // Instantiate an instance for each native constructor using the new keyword.
+        var myNumber = new Number(23);
+        var myString = new String('male');
+        var myBoolean = new Boolean(false);
+        var myObject = new Object();
+        var myArray = new Array('foo', 'bar');
+        var myFunction = new Function("x", "y", "return x*y");
+        var myDate = new Date();
+        var myRegExp = new RegExp('\bt[a-z]+\b');
+        var myError = new Error('Darn!');
+
+
+        // Log/verify which constructor created the object.
+        console.log(myNumber.constructor); // Logs Number()
+        console.log(myString.constructor); // Logs String()
+        console.log(myBoolean.constructor); // Logs Boolean()
+        console.log(myObject.constructor); // Logs Object()
+        console.log(myArray.constructor); // Logs Array() in modern browsers else function.
+        console.log(myFunction.constructor); // Logs Function()
+        console.log(myDate.constructor); // Logs Date()
+        console.log(myRegExp.constructor); // Logs RegExp()
+        console.log(myError.constructor); // Logs Error()
+    </script>
+</body>
+</html>

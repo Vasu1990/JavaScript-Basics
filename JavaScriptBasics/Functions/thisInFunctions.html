@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+        
+
+        var myObject2 = function () { console.log(this); };
+        myObject2(); // Logs window.
+
+
+        var myObject1 = {
+            name: 'myObject1',
+            myMethod: function () { console.log(this); }
+        };
+        //this set on the called object
+        myObject1.myMethod(); // Logs 'myObject1'.
+
+
+        var foo = "arg";
+        var a = function () { return this.foo }
+        a();//arg
+
+        //also look at  CallApplySample
+
+      
+
+    </script>
+</body>
+</html>

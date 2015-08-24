@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+        var counter = 0;
+
+        function add() {
+           return  counter += 1;
+        }
+
+        add();
+        add();
+        add();
+
+        // the counter is now equal to 3
+
+        function add() {
+            var counter = 0;
+           return  counter += 1;
+        }
+
+        add();
+        add();
+        add();
+
+        // the counter should now be 3, but it does not work !
+
+        function add() {
+            var counter = 0;
+            function plus() { counter += 1; }
+            plus();
+            return counter;
+        }
+
+
+        var add = (function () {
+            var counter = 0;
+            return function () { return counter += 1; }
+        })();
+
+        add();
+        add();
+        add();
+
+        // the counter is now 3
+
+
+
+
+    </script>
+</body>
+</html>

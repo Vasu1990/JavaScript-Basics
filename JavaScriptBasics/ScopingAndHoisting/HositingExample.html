@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        
+
+        (function () {
+            //var a ; this is how js sees this
+            a = 10; //declaration hoisted at top
+
+            console.log(a);
+            var a;
+        }());
+
+        //only declaration hoisted not definition
+        (function () {
+            //var a ; this is how js sees this
+            a = 10; //declaration hoisted at top
+
+            console.log(a);
+            var a= 50;
+        }());
+    </script>
+    
+</body>
+</html>

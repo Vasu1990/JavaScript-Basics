@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<script>
+    ////////////Inhertitance explained https://skimmable-videos.herokuapp.com/show/558f4dc9c240320300d8ef34 /////////
+    
+
+    var Person = function () { this.bar = 'bar' };
+    Person.prototype.foo = 'foo'; //proto as property
+
+
+    var Chef = function () { this.goo = 'goo' };
+    Chef.prototype = new Person();
+
+
+
+    var Cody = function () { this.goo = 'goo' };
+    Cody.prototype = new Chef();
+
+    var a = new Cody();
+
+    //a.constructor.prototype why is it Person {foo: "foo"} and not Chef{goo:"goo"}
+    //a.constructor  why is it function Person() and not function cody()
+    //a.__proto__   why is it Chef{goo:"goo"} and not cody{}
+    //Answer:http://stackoverflow.com/questions/32167767/prototype-and-proto-confusing-result?noredirect=1#comment52223174_32167767
+
+
+
+    /////////////CLASSICAL MODEL(RECTIFIED)////////////////////////
+    var Person = function () { this.bar = 'bar' };
+    Person.prototype.foo = 'foo'; //proto as property
+
+    var Chef = function () { this.goo = 'goo' };
+    Chef.prototype = new Person();
+    Chef.prototype.constructor = Chef;
+
+    var Cody = function () { this.goo = 'goo' };
+    Cody.prototype = new Chef();
+    Cody.prototype.constructor = Cody;
+
+    var a = new Cody();
+    
+    //a.constructor.prototype why is it Person {foo: "foo"} and not Chef{goo:"goo"}
+    //a.constructor  why is it function Person() and not function cody()
+    //a.__proto__   why is it Chef{goo:"goo"} and not cody{}
+
+
+    //////////////////////////this gotcha///////////////////////////////////////
+    var Person=  {
+        get: function () { return this.val },
+        val:20
+    }
+
+
+    var Chef = Object.create(Person);
+    Chef.get  =  function () { return Person.get() + " diff ans" }
+    Chef.val = 21;
+
+    //////////////correct use escape this gotcha//////////////////////////
+    var Cody = Object.create(Chef);
+    Cody.get = function () { return Person.get.call(this) + " diff ans" }
+    Cody.val = 22;
+
+    var a = Object.create(Cody);
+
+
+
+    //////////Prototypal Model///////////
+    var Person = {
+        constructor: function fn0(value) {
+            this.val = value;
+        },
+        get: function() {
+            return this.val;
+        },
+        val: 20
+    };
+
+
+    var Chef = Object.create(Person);
+    Chef.constructor(20);
+    Chef.get = function () { return Person.get() + " diff ans" }
+
+
+    var Cody = Object.create(Chef);
+    Cody.constructor(21);
+    Cody.get = function () { return Person.get.call(this) + " diff ans" }
+
+    var a = Object.create(Cody);
+
+
+</script>
+</body>
+</html>

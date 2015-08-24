@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //Variadic Function
+        function PrintList() {
+            for (var i = 0; i < arguments.length; i++) {
+                console.log(arguments[i] + "<br />");
+            }
+        }
+        // Call to Variadic Function
+        PrintList('Google', 'Microsoft', 'Yahoo', 'Adobe');
+
+
+        //IIFE
+        (function (mag) {
+            return mag;
+        })("I am an IIFE");
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+
+        //Primitive no Dynamic prop
+        var a = Number(10);
+        a.num = 200
+        //no a.num
+
+        //complex can have
+        var b = new Number(20);
+        b.num1 = 200;
+        b.num1 //gives 200
+
+
+
+        //primitive equal by value
+        var a = 20;
+        var b = 20;
+        b === a //true
+
+        //Complex by ref
+        var a = { a: 10 };
+        var b = { a: 10 };
+        a===b//false
+
+
+
+
+
+        //primitive stored by value
+        var a1 = a;
+        a = 200;
+        a1//no change
+
+        //complex by reference
+        var a1 = {a:20};
+        a2 = a1;
+        a1.a = null;
+        a2 //also null
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //**PRIMITVES EQUL BY VALUE**//
+            var price1 = 10;
+            var price2 = 10;
+            var price3 = new Number('10'); // A complex numeric object because new was used.
+            var price4 = price3;
+
+            console.log(price1 === price2); // Logs true.
+
+            /* Logs false because price3 contains a complex number object and price 1 is a primitive value. */
+            console.log(price1 === price3);
+
+            // Logs true because complex values are equal by reference, not value.
+            console.log(price4 === price3);
+
+        // What if we update the price4 variable to contain a primitive value?
+        price4 = 10;
+        console.log(price4 === price3); // Logs false: price4 is now primitive rather than complex.
+
+
+        //**Primitive STORED BY value**//
+        var str = "abc";
+        var str1 = str;
+        str = "";
+        console.log(str1);//logs abc
+
+        //**Complex STORED BY Reference**//
+        var objA = { property: 'value' };
+        var pointer1 = objA;
+        var pointer2 = pointer1;
+
+        // Update the objA.property, and all references (pointer1 and pointer2) are updated.
+        objA.property = null;
+
+        // Logs 'null null null' because objA, pointer1, and pointer2 all reference the same object.
+        console.log(objA.property, pointer1.property, pointer2.property);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        /////1.Literal syntax///////
+        var shape = {};
+        shape.color = 'red';
+        shape.borderThickness = '2.0';
+
+        var shape = {
+            color: 'red',
+            borderThickness: '2.0'
+        }
+
+
+        /////2.Native Construct///////
+        var shape = new Object();
+        var myObj = new Object();
+
+        var myObj = {
+            name: "vasu",
+            25:'age',
+            '12 12 12':"dob"
+        }
+
+
+        //NOT SURE
+        /////3.Using user defined constructor/////
+        function Shape(color, borderThickness) {
+            this.color = color;
+            this.borderThickness = borderThickness;
+        }
+        var shape = new Shape('red', 2.0);
+
+
+        ///////4/Object.create//////////
+        var shape = {color:'red'};
+        // create an object with null as prototype
+        o = Object.create(shape); //accepts object
+
+        ///Accessing obejects////
+        myObj1.name;//dot access
+        myObj['12 12 12']//bracket syntax
+
+
+        console.log(myObj);
+
+    </script>
+</body>
+</html>

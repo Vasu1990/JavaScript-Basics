@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script>
+
+   // Define Person constructor function in order to create custom Person() objects later.
+       function Person(living, age, gender) {
+        this.living = living;
+        this.age = age;
+        this.gender = gender;
+        this.getGender = function () { return this.gender; };
+    };
+
+    // Instantiate a Person object and store it in the cody variable.
+       var cody = new Person(true, 33, 'male');
+
+        //**Important**//
+       console.log(cody.constructor); //logs funtion person(true,33,male)
+       console.log(cody.hasOwnProperty('living'));//true  
+    
+    
+    </script>
+</body>
+</html>

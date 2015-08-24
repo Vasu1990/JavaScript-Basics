@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        
+        //Q. What is the value of x2?
+
+        var x1 = 2;
+        var x2 = x1;
+        x1 = null;
+
+        
+
+        //Q What is the value of obj.x2?
+
+        var obj = {
+            x1: 2
+        };
+
+        obj.x2 = obj.x1;
+        obj.x1 = null;
+
+        
+        //Q. What is value of obj2.x?
+
+        var obj1 = {
+            x: 2
+        };
+        var obj2 = obj1;
+        obj1 = null;
+
+        
+        //Q. What is value of obj2.x?
+
+        var obj1 = {
+            x: 2
+        };
+        var obj2 = obj1;
+        obj1.x = null;
+
+        
+        //Q. What is the value of obj2.x?
+
+        var obj1 = {}, obj2 = {};
+
+        obj1.x = 10;
+        obj2.x = obj1.x;
+
+        obj1.x = null;
+
+        
+
+    </script>
+</body>
+</html>
