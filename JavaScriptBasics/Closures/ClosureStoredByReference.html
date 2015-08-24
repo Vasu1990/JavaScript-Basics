@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function cityLocation() {
+            var city = "Delhi";
+
+            return {
+                get: function () { console.log(city); },
+                set: function (newCity) { city = newCity; }
+            };
+        }
+
+        var myLocation = cityLocation();
+
+        myLocation.get();
+        myLocation.set('Bombay');
+        myLocation.get();
+
+        // Here cityLocation() returns an object containing two closures – get() and set() – and they both refer to the outer variable city. 
+        //get() obtains the current value of city, while set() updates it. When myLocation.get() is called for the second time,
+        //it outputs the updated (current) value of city – “Bombay” – rather than the default “Delhi”.
+        // So, closures can both read and update their stored variables, and the updates are visible to any closures that have access to them.
+        //This means that closures store references to their outer variables, rather than copying their values.
+    </script>
+</body>
+</html>
