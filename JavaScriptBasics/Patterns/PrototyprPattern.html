@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        aAbloy.keyDash.DataGridAjax = (function () {
+            var getDataUrl = '';
+            var tempJSONData = {};
+            var tempJSONDataMK = {};
+            var orderGridHasData = false;
+            var mkGridHasData = true;
+            //Constructor for this class-Initialize grid parameter
+            function DataGridAjax(url, pageSize, initialRowCount) {
+                var self = this;
+                getDataUrl = url;
+                self.GridParams = {
+                    GridOperation: ko.observable('SAVE'),
+                    pageIndex: ko.observable(1),
+                    pageSize: ko.observable(pageSize),
+                    sortField: ko.observable(''),
+                    sortOrder: ko.observable('ASC'),
+                    totalRows: ko.observable(0),
+                    totalPages: ko.observable(0),
+                    requestedPage: ko.observable(1),
+                    pageSizeOptions: [5, 10, 20, 30, 50, 100],
+                    initialRowCount: ko.observable(initialRowCount)
+                };
+                //observables for columns to hide
+                self.IsProcessorVisible = ko.observable(true);
+                self.IsBLRVisible = ko.observable(true);
+                self.IsTrackVisible = ko.observable(true);
+
+
+                self.toggleGridColumnVisibility = function (data, ele) {
+                    var toggleHeader = $(event.target).val();
+                    if (data[toggleHeader]() === true) {
+                        $(event.target).attr('checked', true);
+                        data[toggleHeader](false)
+                    } else {
+                        data[toggleHeader](true)
+                    }
+
+                    return true;
+                }
+                self.readonlyTemplateOrder = ko.observable("readonlyTemplateOrder");
+                self.editTemplateOrder = ko.observable();
+                self.readonlyTemplateMK = ko.observable("readonlyTemplateMK");
+                self.editTemplateMK = ko.observable();
+
+                self.DataRows = ko.observableArray();
+                self.SelectedPageSizeOption = ko.observable(pageSize);
+                self.GridParams.requestedPage.subscribe(self.FlipPageDirect, self);
+                self.SelectedPageSizeOption.subscribe(self.ChangePageSize, self);
+                self.currentTemplateOrder = function (tmpl) {
+                    return tmpl === self.editTemplateOrder() ? 'editTemplateOrder' : self.readonlyTemplateOrder();
+                };
+                self.currentTemplateMK = function (tmpl) {
+                    return tmpl === self.editTemplateMK() ? 'editTemplateMK' : self.readonlyTemplateMK();
+                };
+            }
+
+            //implement CRUD operation
+            self.IsNewRecord = false;
+            DataGridAjax.prototype.UpdateOrder = function (data) {
+                var self = this;
+                $.ajax({
+                    url: baseUrl + 'KeySystem/UpdateOrder',
+                    type: 'POST',
+                    data: ko.mapping.toJS(data),
+                    success: function (data) {
+                        aAbloy.keyDash.KeySystem.OrderDataGrid.resetOrder();
+                    }
+                });
+            };
+
+            DataGridAjax.prototype.UpdateMK = function (data) {
+                $.ajax({
+                    url: baseUrl + 'KeySystem/UpdateMK',
+                    type: 'POST',
+                    data: ko.mapping.toJS(data),
+                    success: function (data) {
+                        aAbloy.keyDash.KeySystem.MKDataGrid.resetMK();
+                    }
+                });
+            };
+            DataGridAjax.prototype.editOrder = function (data) {
+                tempJSONData = ko.toJS(data);//store grid data temporarily to push back in case of cancel
+                //make columns visible
+                aAbloy.keyDash.KeySystem.OrderDataGrid.IsProcessorVisible(true);
+                aAbloy.keyDash.KeySystem.OrderDataGrid.IsBLRVisible(true);
+                aAbloy.keyDash.KeySystem.OrderDataGrid.IsTrackVisible(true);
+
+                aAbloy.keyDash.KeySystem.OrderDataGrid.editTemplateOrder(data);
+            };
+
+            //cancel grid edit
+            DataGridAjax.prototype.resetOrder = function (data) {
+
+                ko.mapping.fromJS(tempJSONData, {}, data);
+                aAbloy.keyDash.KeySystem.OrderDataGrid.editTemplateOrder("readonlyTemplateOrder");
+            };
+
+            DataGridAjax.prototype.editMK = function (data) {
+                tempJSONDataMK = ko.toJS(data);//store grid data temporarily to push back in case of cancel
+                aAbloy.keyDash.KeySystem.MKDataGrid.editTemplateMK(data);
+            };
+
+
+
+            DataGridAjax.prototype.resetMK = function (data) {
+                ko.mapping.fromJS(tempJSONDataMK, {}, data);
+                aAbloy.keyDash.KeySystem.MKDataGrid.editTemplateMK("readonlyTemplateMK");
+            };
+            //Get Data public function 
+            DataGridAjax.prototype.GetData = function () {
+                var self = this;
+
+                if (getDataUrl.indexOf("GetMasterKeyData") > -1) {
+                    orderGridHasData = true;
+                } else if (getDataUrl.indexOf("GetOrderData") > -1) {
+                    mkGridHasData = true;
+                }
+                aAbloy.keyDash.Services.AjaxPostCall(getDataUrl, self.GridParams, $.proxy(self.OnGetDataDone, this));
+            };
+            //Set Grid Parameter public function
+            DataGridAjax.prototype.OnGetDataDone = function (data) {
+                console.log(data);
+                if (data != "") {
+                    var self = this;
+
+                    if (typeof keySystemViewModel != "undefined") {
+                        keySystemViewModel.MKGridVisible(mkGridHasData);
+                        keySystemViewModel.OrderGridVisible(orderGridHasData);
+                    }
+                    self.DataRows(ko.mapping.fromJS($.parseJSON(data.result))());
+                    self.GridParams.totalRows(aAbloy.keyDash.Utils.GetJson(data.totalRows));
+                    var totalPages = Math.ceil(self.GridParams.totalRows() / self.GridParams.pageSize());
+                    self.GridParams.totalPages(totalPages);
+                    self.GridParams.requestedPage(self.GridParams.pageIndex());
+                }
+            };
+            //Change the grid page by clicking on Next/Previous button
+            DataGridAjax.prototype.FlipPage = function (nkeyDashPageNo) {
+                var self = this;
+                if (parseInt(nkeyDashPageNo) > 0 && parseInt(nkeyDashPageNo) <= self.GridParams.totalPages()) {
+                    self.GridParams.pageIndex(nkeyDashPageNo);
+                    self.GridParams.GridOperation('FETCH');
+                    self.GetData();
+                }
+            };
+            //Change the grid page directly by putting value into textbox 
+            DataGridAjax.prototype.FlipPageDirect = function (newValue) {
+                var self = this;
+                self.GridParams.GridOperation('FETCH');
+                var ri = parseInt(self.GridParams.requestedPage());
+                if (ri == NaN) {
+                    self.GridParams.requestedPage(self.GridParams.pageIndex());
+                    return;
+                }
+                if (ri > 0 && ri <= self.GridParams.totalPages()) {
+                    self.GridParams.pageIndex(ri);
+                    self.GetData();
+                    return;
+                }
+                self.GridParams.requestedPage(self.GridParams.pageIndex());
+                return;
+            };
+            //public function to change the page size
+            DataGridAjax.prototype.ChangePageSize = function () {
+                var self = this;
+                if (self.GridParams.pageSize() != self.SelectedPageSizeOption()) {
+                    self.GridParams.GridOperation('FETCH');
+                    self.GridParams.pageSize(self.SelectedPageSizeOption());
+                    self.GridParams.pageIndex(1);
+                    self.GridParams.requestedPage(1);
+                    self.GetData();
+                }
+            };
+            //delete order
+            DataGridAjax.prototype.deleteOrder = function (data) {
+                var self = this;
+                console.log(self);
+                $.ajax({
+                    url: baseUrl + 'KeySystem/DeleteOrder',
+                    type: 'POST',
+                    data: ko.mapping.toJS(data),
+                    success: function (result) {
+                        self.DataRows.remove(data);
+                    },
+                    error: function () {
+                        alert("Error Deleting Order");
+                    }
+                });
+
+            };
+            //delete MK
+            DataGridAjax.prototype.deleteMK = function (data) {
+                var self = this;
+                console.log(self);
+                $.ajax({
+                    url: baseUrl + 'KeySystem/DeleteMK',
+                    type: 'POST',
+                    data: ko.mapping.toJS(data),
+                    success: function (result) {
+                        self.DataRows.remove(data);
+                    },
+                    error: function () {
+                        alert("Error Deleting MK");
+                    }
+                });
+
+            };
+            //public function to sort by column
+            DataGridAjax.prototype.Sort = function (col) {
+                var self = this;
+                if (self.GridParams.sortField() === col) {
+                    if (self.GridParams.sortOrder() === 'ASC') {
+                        self.GridParams.sortOrder('DESC');
+                    } else {
+                        self.GridParams.sortOrder('ASC');
+                    }
+                } else {
+                    self.GridParams.sortOrder('ASC');
+                    self.GridParams.sortField(col);
+                }
+                self.GetData();
+            };
+            return DataGridAjax;
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+
+        var NameSpace = {};//global name space
+
+        //namespace for class
+        NameSpace.Result = (function () {
+
+            //constructor
+            function MyClass() {
+                alert("init");
+            }
+
+            //adding methods to be shared
+            MyClass.prototype.run = function() {
+                alert("running");
+            }
+
+            //returning instance
+            return MyClass;
+
+        })();
+
+        //instansiating object
+        var obj = new NameSpace.Result();
+        obj.run();//invoking method
+
+    </script>
+</body>
+</html>
