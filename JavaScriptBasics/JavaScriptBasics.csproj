@@ -63,6 +63,7 @@
     <Content Include="Constructors\NativeConstructors.html" />
     <Content Include="Constructors\UserDefinedConstructors.html" />
     <Content Include="DefaultAndGaurd\UseCase.html" />
+    <Content Include="Patterns\effective.js" />
     <Content Include="Patterns\ModulePattern.html" />
     <Content Include="PrimitveVsComplexTypes\Quiz Solution.html" />
     <Content Include="Prototype\MadChain.html" />

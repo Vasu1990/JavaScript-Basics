@@ -12,7 +12,7 @@
         NameSpace.Result = (function () {
 
             //constructor
-            function MyClass() {
+            function MyClass(a) {
                 alert("init");
             }
 
@@ -27,7 +27,7 @@
         })();
 
         //instansiating object
-        var obj = new NameSpace.Result();
+        var obj = new NameSpace.Result(10);
         obj.run();//invoking method
 
     </script>
