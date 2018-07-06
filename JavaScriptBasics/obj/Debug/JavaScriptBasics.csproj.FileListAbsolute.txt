@@ -1,6 +1,0 @@
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\bin\JavaScriptBasics.dll.config
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\bin\JavaScriptBasics.dll
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\bin\JavaScriptBasics.pdb
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\obj\Debug\JavaScriptBasics.csprojResolveAssemblyReference.cache
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\obj\Debug\JavaScriptBasics.dll
-C:\Users\vasunagpal\Documents\Visual Studio 2013\Projects\FirstWindowsApp\JavaScriptBasics\JavaScriptBasics\obj\Debug\JavaScriptBasics.pdb

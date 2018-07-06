@@ -1,0 +1,176 @@
+1. Constructors : Native , UserDefined?
+   function Person(living) {
+        this.living = living;
+    };
+    Person.prototype.greet = function() {
+      console.log("hi");
+    }
+    
+// Instantiate a Person object and store it in the cody variable.
+  var cody = new Person(true);
+
+//**Questions**//
+console.log(cody.constructor);
+console.log(cody.hasOwnProperty('living'));
+console.log(cody.hasOwnProperty('greet'));
+
+2. Data Types - Primitive complex
+
+var no1 = Number('10'); 
+var no2 = new Number('10');
+
+var str = "abc";
+        var str1 = str;
+        str = "";
+
+        //**Complex STORED BY Reference**//
+        var objA = { property: 'value' };
+        var pointer1 = objA;
+        var pointer2 = pointer1;
+/////////////////////////////////////////////////////
+         var obj = {
+            x1: 2
+        };
+
+        obj.x2 = obj.x1;
+        obj.x1 = null;
+
+//**Questions**//
+1. console.log(str1); ?
+objA.property = null;
+2. console.log(objA.property, pointer1.property, pointer2.property); ?
+objA = null;
+3. console.log(objA.property, pointer1.property, pointer2.property); ?
+4.obj.x2?
+
+3.Hoisting
+  //////////////variable hositing//////////////////////////
+        function Fun(param){
+            a = 10; 
+
+            if(param) {
+                var a = 20;
+                // 2. What is the value of variable “a” here? 
+                console.log("second pos inside if " + a);
+            }
+
+            // 3. What is the value of variable “a” here? 
+            console.log("third pos outside if " + a);
+        }
+
+        Fun(true);
+
+        /////////////////////////////////////////////////function hositing////////
+         // Position 1
+      
+        var Fun1 = function(){
+            Fun2();
+        }
+
+            // Position 2
+
+            var Fun2 = function() {
+                alert('Hi');
+            }
+
+4. Closures
+for(var i=1; i<10; i++){      
+    setTimeout(function(){
+      console.log(i ,"o/p");
+    }, 1000);
+}
+
+for(var i=1; i<10; i++){    
+    (function(x){      
+        setTimeout(function(){
+        console.log(x , "o/p");
+        }, 1000);      
+    })(i);
+    }
+
+5. Context this
+const greet = {
+  name: 'sfdds',
+  runGreet() {
+    console.log(this.name, arguments[0], arguments[1]);
+  },
+};
+
+const cody = { name: 'codyBoy' };
+const lisa = { name: 'lisa' };
+
+
+greet.runGreet('foo', 'bar');
+
+
+
+ES6 features
+function calculateTotalAmount (vip) {
+    var amount = 0
+    if (vip) {
+      var amount = 1
+    }
+    { // more crazy blocks!
+      var amount = 100
+      {
+        var amount = 1000
+        }
+    }  
+    return amount
+  }
+  
+  console.log(calculateTotalAmount(true))
+
+
+
+      var [a, , b] = [1, 2, 3];
+console.log(a, b);
+
+// Combine with spread/rest operator (accumulates the rest of the values)
+var [a, ...b] = [1, 2, 3];
+console.log(a, b);
+-------
+CSS
+span vs div
+<style>
+.wrap{
+  box-sizing: border-box;
+}
+.col{
+  height:100px;
+  margin:20px;
+}
+</style>
+<div class="wrap">
+  <div class="col">
+  </div>
+  <div class="col">
+  </div>
+</div>
+
+reset vs normalize css
+floating box problem
+
+
+
+bootstrap -
+ 2 pro nd cons
+mobile first
+
+
+React
+Sibling communication
+add focus to input
+should comp update
+HOC
+pure comp
+
+Performance
+async vs defer
+progressive enhancement
+graceful degradation
+
+Webpack
+diff from grunt or gulp
+loader vs Plugin
+Hot-Modules-Replacement
